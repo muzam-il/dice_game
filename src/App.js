@@ -5,7 +5,7 @@ import "./App.css";
 function App() {
   return (
     <div className="col-2 offset-5 text-center ">
-      <h2>Dice Game!</h2>
+      <h2 className="primary">Dice Game!</h2>
     </div>
   );
 }
