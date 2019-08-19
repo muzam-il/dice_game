@@ -1,29 +1,45 @@
 import React, { Component } from "react";
 class Counter extends Component {
   state = {
-    count: 1
+    count: 5
   };
-  styles = {
-    fontSize: 20,
-    fontWeight: 'bold',
-  };
+ 
   render() {
     return (
       <React.Fragment>
-        <span style={this.styles} className={this.classNameProducer()}>
+        <span  className={this.classNameProducer()}>
           {this.formatCount()}
         </span>
-        <button className="">Incriment</button>
+        <ul className='list-group'>{this.lister()}</ul>
+        <button onClick={this.increment} className="btn btn-success">Incriment</button>
       </React.Fragment>
     );
   }
-classNameProducer(){
-  let clasName="badge badge-";
-  return this.state.count === 0 ? clasName+'warning' : clasName+'secondary';
-}
+   increment=()=>{
+    console.log(this.state.count)
+    this.setState({count:this.state.count+1})
+    console.log(this.state.count)
+  }
+  lister = ()=> {
+    const list=['one','two','three','four','five','six','seven','eight','nine','ten'];
+    if(this.state.count === 0){
+      return <h3>NO tags</h3>
+    }
+    let listc=[];
+    for(let i=0;i<this.state.count;i++){
+      listc.push(list[i]);
+    }
+
+    return  listc.map(item => <li className='list-group-item' key={item}>{item}</li>)
+
+  }
+  classNameProducer(){
+    let clasName="badge badge-";
+    return this.state.count === 0 ? clasName+'warning' : clasName+'secondary';
+  }
   formatCount() {
     const { count } = this.state;
-    return count == 0 ? <h1>zero</h1> : count;
+    return count === 0 ? <h1>zero</h1> : count;
   }
 }
 
