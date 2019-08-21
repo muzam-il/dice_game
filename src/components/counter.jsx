@@ -1,45 +1,47 @@
 import React, { Component } from "react";
 class Counter extends Component {
   state = {
-    count: 5
+    value: this.props.value
   };
- 
+
   render() {
     return (
-      <React.Fragment>
-        <span  className={this.classNameProducer()}>
+      <div className="pt-3 offset-1 pl-1">
+        {/* {this.props.children} */}
+        <span
+          style={{ fontSize: 18 }}
+          className={this.classNameProducer() + " p-2 col-1 m-1"}
+        >
           {this.formatCount()}
         </span>
-        <ul className='list-group'>{this.lister()}</ul>
-        <button onClick={this.increment} className="btn btn-success">Incriment</button>
-      </React.Fragment>
+        <button
+          onClick={() => this.increment({ val: this.state.value + 3 })}
+          className={this.incr()}
+        >
+          {this.props.selected ? "ji" : "hbhjb"}
+        </button>
+      </div>
     );
   }
-   increment=()=>{
-    console.log(this.state.count)
-    this.setState({count:this.state.count+1})
-    console.log(this.state.count)
-  }
-  lister = ()=> {
-    const list=['one','two','three','four','five','six','seven','eight','nine','ten'];
-    if(this.state.count === 0){
-      return <h3>NO tags</h3>
-    }
-    let listc=[];
-    for(let i=0;i<this.state.count;i++){
-      listc.push(list[i]);
-    }
 
-    return  listc.map(item => <li className='list-group-item' key={item}>{item}</li>)
+  incr = () => {
+    let clss = "btn m-1 col-1 btn-";
+    return this.props.selected ? clss + "success" : clss + "warning";
+  };
+  increment = id => {
+    console.log(id);
+    this.setState({ value: this.state.value + 1 });
+  };
 
-  }
-  classNameProducer(){
-    let clasName="badge badge-";
-    return this.state.count === 0 ? clasName+'warning' : clasName+'secondary';
+  classNameProducer() {
+    let clasName = "badge badge-";
+    return this.state.value === 0
+      ? clasName + "warning"
+      : clasName + "secondary";
   }
   formatCount() {
-    const { count } = this.state;
-    return count === 0 ? <h1>zero</h1> : count;
+    const { value } = this.state;
+    return value === 0 ? "zero" : value;
   }
 }
 
