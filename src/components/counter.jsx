@@ -14,7 +14,10 @@ class Counter extends Component {
         >
           {this.formatCount()}
         </span>
-        <button onClick={this.increment} className={this.incr()}>
+        <button
+          onClick={() => this.props.onIncrement(this.props.counter)}
+          className={this.incr()}
+        >
           Increment
         </button>
         <button
@@ -31,18 +34,15 @@ class Counter extends Component {
     let clss = "btn m-1  btn-";
     return this.props.counter.selected ? clss + "success" : clss + "warning";
   };
-  increment = () => {
-    this.setState({ value: this.state.value + 1 });
-  };
 
   classNameProducer() {
     let clasName = "badge badge-";
-    return this.state.value === 0
+    return this.props.counter.value === 0
       ? clasName + "warning"
       : clasName + "secondary";
   }
   formatCount() {
-    const { value } = this.state;
+    const { value } = this.props.counter;
     return value === 0 ? "zero" : value;
   }
 }
