@@ -12,11 +12,22 @@ class Counters extends Component {
       { id: 54525, value: 3, selected: true }
     ]
   };
+  handleDelete = id => {
+    console.log("Delete button clicked", id);
+    const counters = this.state.counters.filter(c => c.id != id);
+    this.setState({ counters });
+  };
+
   render() {
     return (
       <>
-        {this.state.counters.map(item => (
-          <Counter key={item.id} value={item.value} selected={item.selected} />
+        <button className="btn btn-dark btn-lg">Reset</button>
+        {this.state.counters.map(counter => (
+          <Counter
+            key={counter.id}
+            counter={counter}
+            onDelete={this.handleDelete}
+          />
         ))}
       </>
     );

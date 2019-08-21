@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 class Counter extends Component {
   state = {
-    value: this.props.value
+    value: this.props.counter.value
   };
 
   render() {
@@ -14,22 +14,24 @@ class Counter extends Component {
         >
           {this.formatCount()}
         </span>
+        <button onClick={this.increment} className={this.incr()}>
+          Increment
+        </button>
         <button
-          onClick={() => this.increment({ val: this.state.value + 3 })}
-          className={this.incr()}
+          onClick={() => this.props.onDelete(this.props.counter.id)}
+          className="btn btn-danger btn-sm"
         >
-          {this.props.selected ? "ji" : "hbhjb"}
+          Delete
         </button>
       </div>
     );
   }
 
   incr = () => {
-    let clss = "btn m-1 col-1 btn-";
-    return this.props.selected ? clss + "success" : clss + "warning";
+    let clss = "btn m-1  btn-";
+    return this.props.counter.selected ? clss + "success" : clss + "warning";
   };
-  increment = id => {
-    console.log(id);
+  increment = () => {
     this.setState({ value: this.state.value + 1 });
   };
 
