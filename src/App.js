@@ -2,6 +2,7 @@ import "./App.css";
 import NavBar from "./components/navbar";
 import Counters from "./components/counters";
 import React, { Component } from "react";
+import { PassThrough } from "stream";
 
 export default class App extends Component {
   state = {
@@ -13,38 +14,38 @@ export default class App extends Component {
       { id: 54525, value: 3, selected: true }
     ]
   };
+
   render() {
     return (
       <>
-        <NavBar />
+        <NavBar count={this.state.counters.filter(c => c.value > 0).length} />
         <Counters
           counters={this.state.counters}
-          onIncrement={() => this.handleIncrement}
-          onDelete={() => this.handleDelete}
-          onReset={() => this.handleReset}
+          onIncrement={this.handleIncrement}
+          onDelete={this.handleDelete}
+          onReset={this.handleReset}
         />
       </>
     );
   }
-  handleDelete = id => {
-    console.log("Delete button clicked", id);
-    const counters = this.state.counters.filter(c => c.id !== id);
-    this.setState({ counters });
-  };
-  handleIncrement = counter => {
+  handleIncrement = id => {
     const counters = this.state.counters.map(c => {
-      if (c === counter) {
-        c.value += 1;
+      if (c.id === id) {
+        c.value = c.value + 1;
       }
       return c;
     });
     this.setState({ counters });
   };
   handleReset = () => {
-    // const counters = this.state.counters.map(c => {
-    //   c.value = 0;
-    //   return c;
-    // });
-    // this.setState({ counters: counters });
+    const counters = this.state.counters.map(c => {
+      c.value = 0;
+      return c;
+    });
+    this.setState({ counters });
+  };
+  handleDelete = id => {
+    const counters = this.state.counters.filter(c => c.id !== id);
+    this.setState({ counters });
   };
 }

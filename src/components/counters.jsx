@@ -4,23 +4,21 @@ import ReactDOM from "react-dom";
 
 class Counters extends Component {
   render() {
+    const { onReset, counters, onDelete, onIncrement } = this.props;
     return (
-      <div>
-        <button
-          onClick={this.props.onReset}
-          className="btn btn-dark btn-lg m-2"
-        >
+      <>
+        <button onClick={onReset} className="btn m-2 btn-dark btn-lg">
           Reset
         </button>
-        {this.props.counters.map(counter => (
+        {counters.map(counter => (
           <Counter
             key={counter.id}
             counter={counter}
-            onDelete={this.props.onDelete}
-            onIncrement={this.props.onIncrement}
+            onDelete={id => onDelete(id)}
+            onIncrement={id => onIncrement(id)}
           />
         ))}
-      </div>
+      </>
     );
   }
 }
