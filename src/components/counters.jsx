@@ -7,7 +7,7 @@ class Counters extends Component {
     return (
       <div>
         <button
-          onClick={() => this.props.onReset}
+          onClick={this.props.onReset}
           className="btn btn-dark btn-lg m-2"
         >
           Reset
@@ -16,8 +16,8 @@ class Counters extends Component {
           <Counter
             key={counter.id}
             counter={counter}
-            onDelete={() => this.props.onDelete}
-            onIncrement={() => this.props.onIncrement}
+            onDelete={this.props.onDelete}
+            onIncrement={this.props.onIncrement}
           />
         ))}
       </div>

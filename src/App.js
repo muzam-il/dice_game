@@ -17,7 +17,6 @@ export default class App extends Component {
     return (
       <>
         <NavBar />
-        {console.log(this.state.counters)}
         <Counters
           counters={this.state.counters}
           onIncrement={() => this.handleIncrement}
